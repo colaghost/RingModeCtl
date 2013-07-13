@@ -55,11 +55,13 @@ public class DialogActivity extends Activity implements OnClickListener{
                 SharedPreferences.Editor editor = settings.edit();
                 String addSSID = editText.getText().toString();
                 editor.putInt(addSSID, ringMode);
-                if (base.getSSID(this).equals(addSSID)) {
-                    editor.putString("df_connect_ssid", addSSID);
-                    if (base.getRingMode(this) != ringMode) {
-                        editor.putBoolean("df_change_ring", true);
-                        base.setRingMode(this, ringMode);
+                if (!settings.getBoolean("df_set", false) && !settings.getBoolean("df_user_stop", false)) {
+                    if (base.getSSID(this).equals(addSSID)) {
+                        editor.putString("df_connect_ssid", addSSID);
+                        if (base.getRingMode(this) != ringMode) {
+                            editor.putBoolean("df_change_ring", true);
+                            base.setRingMode(this, ringMode);
+                        }
                     }
                 }
                 editor.commit();
