@@ -4,7 +4,6 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:theme="@android:style/Theme.Holo.Light.Dialog"
                 tools:context=".DialogSetting">
 
     <TextView
@@ -12,9 +11,10 @@
             android:layout_height="wrap_content"
             android:text="默认"
             android:id="@+id/textView"
+            android:height="30dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:height="30dp"/>
+            android:layout_marginLeft="10dp"/>
 
     <Spinner
             android:layout_width="wrap_content"
@@ -22,7 +22,7 @@
             android:id="@+id/setting_spinner"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/textView"
-            android:layout_marginLeft="11dp"/>
+            android:layout_marginLeft="40dp"/>
 
     <TextView
             android:layout_width="wrap_content"
@@ -31,7 +31,8 @@
             android:id="@+id/textView2"
             android:layout_below="@+id/setting_spinner"
             android:layout_alignParentLeft="true"
-            android:layout_marginTop="11dp"/>
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"/>
 
     <TextView
             android:layout_width="wrap_content"
@@ -44,21 +45,10 @@
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="确定"
-            android:id="@+id/button_set"
-            android:layout_below="@+id/state_text"
-            android:layout_alignLeft="@+id/state_text"
-            android:layout_marginTop="26dp"/>
-
-    <Button
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-            android:text="取消"
-            android:id="@+id/button_cancle"
-            android:layout_alignTop="@+id/button_set"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="26dp"/>
+            android:text="恢复"
+            android:id="@+id/button_reset"
+            android:layout_alignTop="@+id/state_text"
+            android:layout_centerHorizontal="true"/>
 
 
 </RelativeLayout>

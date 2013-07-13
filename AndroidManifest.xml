@@ -31,7 +31,7 @@
         <activity
                 android:name=".DialogSetting"
                 android:label="设置"
-                android:theme="@android:style/Theme.Holo.Light.Dialog">
+                android:theme="@android:style/Theme.Holo.Light.DarkActionBar">
         </activity>
         <receiver android:name="ConnectionChangeReceiver">
             <intent-filter>

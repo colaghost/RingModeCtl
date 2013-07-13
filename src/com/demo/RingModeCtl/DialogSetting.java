@@ -1,11 +1,14 @@
 package com.demo.RingModeCtl;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -17,8 +20,7 @@ import android.widget.TextView;
  */
 public class DialogSetting extends Activity implements OnClickListener{
     private Spinner mSpinner;
-    private Button mSetBtn;
-    private Button mCancleBtn;
+    private Button mResetBtn;
     private TextView mState;
     private ArrayAdapter<String> adapter;
     private static final Base base = new Base();
@@ -26,19 +28,34 @@ public class DialogSetting extends Activity implements OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting);
 
+
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         mSpinner = (Spinner)findViewById(R.id.setting_spinner);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, base.getRingArray());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinner.setAdapter(adapter);
 
-        mSetBtn = (Button)findViewById(R.id.button_set);
-        mSetBtn.setOnClickListener(this);
-
-        mCancleBtn = (Button)findViewById(R.id.button_cancle);
-        mCancleBtn.setOnClickListener(this);
+        mResetBtn = (Button)findViewById(R.id.button_reset);
+        mResetBtn.setOnClickListener(this);
 
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
         mSpinner.setSelection(base.getRingIndex(settings.getInt("df_default_ring_mode", AudioManager.RINGER_MODE_VIBRATE)));
+        mSpinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(view.getContext());
+                int ringMode = base.getRingMode(mSpinner.getSelectedItemPosition());
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putInt("df_default_ring_mode", ringMode);
+                editor.commit();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         mState = (TextView)findViewById(R.id.state_text);
         mState.setText(base.getRingModeState(settings.getBoolean("df_set", false), settings.getBoolean("df_user_stop", false)));
@@ -46,7 +63,15 @@ public class DialogSetting extends Activity implements OnClickListener{
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button_set: {
+            case R.id.button_reset: {
+                SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+                SharedPreferences.Editor editor = settings.edit();
+                mState.setText("自动模式");
+                editor.putBoolean("df_user_stop", false);
+                editor.commit();
+                break;
+            }
+            case R.id.setting_spinner: {
                 SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
                 int ringMode = base.getRingMode(mSpinner.getSelectedItemPosition());
                 SharedPreferences.Editor editor = settings.edit();
@@ -54,9 +79,15 @@ public class DialogSetting extends Activity implements OnClickListener{
                 editor.commit();
                 break;
             }
-            case R.id.button_cancle:
+        }
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
                 break;
         }
-        this.finish();
+        return true;
     }
 }
