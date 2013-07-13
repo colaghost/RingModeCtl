@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_set"
+          android:title="@string/menu_set"
+          android:showAsAction="ifRoom|withText" />
+    <item android:id="@+id/menu_add"
+          android:icon="@drawable/content_new"
+          android:title="@string/menu_add"
+          android:showAsAction="ifRoom|withText" />
+    <item android:id="@+id/menu_normal"
+          android:icon="@drawable/volume_on"
+          android:title="@string/menu_normal" />
+    <item android:id="@+id/menu_vibrate"
+          android:icon="@drawable/volume_vibrate"
+          android:title="@string/menu_vibrate" />
+    <item android:id="@+id/menu_silent"
+          android:title="@string/menu_silent" />
+    <item android:id="@+id/menu_settings"
+        android:title="@string/menu_settings"
+        android:orderInCategory="100" />
+</menu>

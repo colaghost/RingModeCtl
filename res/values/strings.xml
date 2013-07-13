@@ -1,0 +1,13 @@
+<resources>
+
+    <string name="app_name">AutoRingMode</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">设置</string>
+    <string name="menu_silent">静音</string>
+    <string name="menu_normal">响铃</string>
+    <string name="menu_vibrate">震动</string>
+    <string name="menu_set">勿扰</string>
+    <string name="menu_add">添加</string>
+    <string name="title_activity_main">AutoRingMode</string>
+
+</resources>
